@@ -23,6 +23,7 @@
 		71660909244C571C00738ADB /* ButtonCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71660908244C571C00738ADB /* ButtonCellViewModel.swift */; };
 		7166090B244C572800738ADB /* ColorCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7166090A244C572800738ADB /* ColorCellViewModel.swift */; };
 		B16734E7398ECCDE428DC2FC /* Pods_RxTableViewDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 231A844E3ECD6027C8076B90 /* Pods_RxTableViewDemo.framework */; };
+		E1CE08E024512AD30006CC89 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CE08DF24512AD30006CC89 /* Utility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		71660908244C571C00738ADB /* ButtonCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCellViewModel.swift; sourceTree = "<group>"; };
 		7166090A244C572800738ADB /* ColorCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCellViewModel.swift; sourceTree = "<group>"; };
 		91278C6C29266190B23242FC /* Pods-RxTableViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxTableViewDemo.release.xcconfig"; path = "Target Support Files/Pods-RxTableViewDemo/Pods-RxTableViewDemo.release.xcconfig"; sourceTree = "<group>"; };
+		E1CE08DF24512AD30006CC89 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				71660904244C570E00738ADB /* ColorCell.swift */,
 				71660905244C570E00738ADB /* ColorCell.xib */,
 				7166090A244C572800738ADB /* ColorCellViewModel.swift */,
+				E1CE08DF24512AD30006CC89 /* Utility.swift */,
 			);
 			path = RxTableViewDemo;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1CE08E024512AD30006CC89 /* Utility.swift in Sources */,
 				7136B4D5244AFA1F00908763 /* ViewController.swift in Sources */,
 				716608F9244C3DB000738ADB /* ViewModel.swift in Sources */,
 				71660906244C570E00738ADB /* ColorCell.swift in Sources */,

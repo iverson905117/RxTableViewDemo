@@ -20,17 +20,28 @@
                         <rect key="frame" x="137" y="7" width="46" height="30"/>
                         <state key="normal" title="Button"/>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Awt-UQ-gyf">
+                        <rect key="frame" x="0.0" y="41" width="160" height="3"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="3" id="eva-FZ-Q43"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Awt-UQ-gyf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="DX3-Mh-gAG"/>
+                    <constraint firstItem="Awt-UQ-gyf" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1:2" id="YVd-j9-oyT"/>
                     <constraint firstItem="rs6-VN-L1e" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fOI-IS-P9a"/>
+                    <constraint firstAttribute="bottom" secondItem="Awt-UQ-gyf" secondAttribute="bottom" id="rw6-5j-lsY"/>
                     <constraint firstItem="rs6-VN-L1e" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="vIT-pk-Kty"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="button" destination="rs6-VN-L1e" id="uy3-zo-jZQ"/>
+                <outlet property="lineView" destination="Awt-UQ-gyf" id="mbz-LH-fCB"/>
             </connections>
-            <point key="canvasLocation" x="139" y="154"/>
+            <point key="canvasLocation" x="137.68115942028987" y="153.34821428571428"/>
         </tableViewCell>
     </objects>
 </document>

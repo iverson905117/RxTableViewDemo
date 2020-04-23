@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     let viewModel = ViewModel()
     let disposeBag = DisposeBag()
     
+    let cellButtonOnTap = PublishSubject<()>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,24 +38,20 @@ class ViewController: UIViewController {
         tableView.register(UINib(nibName: String(describing: ColorCell.self), bundle: nil), forCellReuseIdentifier: String(describing: ColorCell.self))
     }
     
-    func bindViewModel() {
-        
-        let input = ViewModel.Input()
-        let output = viewModel.transform(input: input)
-        output.dataSouce
-            .drive(tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
-    }
-    
-    lazy var dataSource: RxTableViewSectionedReloadDataSource<ViewModel.SectionModel> = {
-        return RxTableViewSectionedReloadDataSource<ViewModel.SectionModel>(configureCell: { [weak self] (_, tableView, indexPath, item) -> UITableViewCell in
+    lazy var animatedDataSource: RxTableViewSectionedAnimatedDataSource<ViewModel.SectionModel> = {
+        return RxTableViewSectionedAnimatedDataSource<ViewModel.SectionModel>(configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
             switch item {
             case .labelItem(let vm):
                 let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath) as! LabelCell
                 cell.configure(viewModel: vm)
                 return cell
             case .buttonItem(let vm):
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as!  ButtonCell
+                cell.button.rx.tap
+                    .subscribe(onNext: { [weak self] _ in
+                        self?.cellButtonOnTap.onNext(())
+                    })
+                    .disposed(by: self.disposeBag)
                 cell.configure(viewModel: vm)
                 return cell
             case .colorItem(let vm):
@@ -64,6 +62,15 @@ class ViewController: UIViewController {
         })
     }()
 
+    
+    func bindViewModel() {
+        
+        let input = ViewModel.Input(buttonCellOnTap: cellButtonOnTap.asDriver(onErrorJustReturn: ()))
+        let output = viewModel.transform(input: input)
+        output.dataSouce
+            .drive(tableView.rx.items(dataSource: animatedDataSource))
+            .disposed(by: disposeBag)
+    }
 }
 
 extension ViewController: UITableViewDelegate {

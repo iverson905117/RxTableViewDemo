@@ -24,7 +24,8 @@ class LabelCell: UITableViewCell {
     }
     
     func configure(viewModel: LabelCellViewModel) {
-        label.text = viewModel.text
+        label.text = viewModel.title
+        backgroundColor = viewModel.color
     }
     
 }

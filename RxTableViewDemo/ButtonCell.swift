@@ -12,7 +12,10 @@ import RxSwift
 class ButtonCell: UITableViewCell {
 
     @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var lineView: UIView!
     let disposeBag = DisposeBag()
+    
+    var mode: Int = 1
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,5 +30,22 @@ class ButtonCell: UITableViewCell {
     
     func configure(viewModel: ButtonCellViewModel) {
         backgroundColor = viewModel.color
+        button.setTitle(viewModel.title, for: .normal)
+        button.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.mode = self.mode == 1 ? 2 : 1
+                UIView.animate(withDuration: 0.3) {
+                    switch self.mode {
+                    case 1:
+                        self.lineView.transform = .identity
+                    case 2:
+                        self.lineView.transform = CGAffineTransform(translationX: self.lineView.bounds.size.width, y: 0)
+                    default:
+                        break
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }

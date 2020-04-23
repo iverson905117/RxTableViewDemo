@@ -7,7 +7,16 @@
 //
 
 import UIKit
+import RxDataSources
 
 struct ButtonCellViewModel {
+    let title: String
     var color: UIColor
+}
+
+extension ButtonCellViewModel: IdentifiableType, Equatable {
+    
+    var identity: String {
+        return title
+    }
 }

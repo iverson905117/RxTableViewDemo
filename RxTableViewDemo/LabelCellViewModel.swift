@@ -7,7 +7,16 @@
 //
 
 import Foundation
+import RxDataSources
 
 struct LabelCellViewModel {
-    let text: String
+    let title: String
+    let color: UIColor
+}
+
+extension LabelCellViewModel: IdentifiableType, Equatable {
+    
+    var identity: String {
+        return title
+    }
 }
