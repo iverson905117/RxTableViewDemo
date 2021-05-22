@@ -39,27 +39,29 @@ class ViewController: UIViewController {
     }
     
     lazy var animatedDataSource: RxTableViewSectionedAnimatedDataSource<ViewModel.SectionModel> = {
-        return RxTableViewSectionedAnimatedDataSource<ViewModel.SectionModel>(configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
-            switch item {
-            case .labelItem(let vm):
-                let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath) as! LabelCell
-                cell.configure(viewModel: vm)
-                return cell
-            case .buttonItem(let vm):
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as!  ButtonCell
-                cell.button.rx.tap
-                    .subscribe(onNext: { [weak self] _ in
-                        self?.cellButtonOnTap.onNext(())
-                    })
-                    .disposed(by: self.disposeBag)
-                cell.configure(viewModel: vm)
-                return cell
-            case .colorItem(let vm):
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ColorCell", for: indexPath) as! ColorCell
-                cell.configure(viewModel: vm)
-                return cell
-            }
-        })
+        return RxTableViewSectionedAnimatedDataSource<ViewModel.SectionModel>(
+            animationConfiguration: AnimationConfiguration(insertAnimation: .top, reloadAnimation: .none, deleteAnimation: .top),
+            configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
+                switch item {
+                case .labelItem(let vm):
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath) as! LabelCell
+                    cell.configure(viewModel: vm)
+                    return cell
+                case .buttonItem(let vm):
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as!  ButtonCell
+                    cell.button.rx.tap
+                        .subscribe(onNext: { [weak self] _ in
+                            self?.cellButtonOnTap.onNext(())
+                        })
+                        .disposed(by: self.disposeBag)
+                    cell.configure(viewModel: vm)
+                    return cell
+                case .colorItem(let vm):
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "ColorCell", for: indexPath) as! ColorCell
+                    cell.configure(viewModel: vm)
+                    return cell
+                }
+            })
     }()
 
     
